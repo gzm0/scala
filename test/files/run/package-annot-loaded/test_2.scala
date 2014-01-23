@@ -4,20 +4,9 @@ object Test extends CompilerTest {
 
   override def extraSettings: String = "-usejavacp -nowarn -Ystop-after:typer"
 
-  override def code =
-    // A package object with an annotation. We will check that both
-    // symbols have the annotations set
-    """
-    package foo
-
-    import scala.annotation.StaticAnnotation
-    class annot extends StaticAnnotation
-    
-    @annot
-    package object bar {
-      def value = 1
-    }
-    """.trim
+  // Compiler doesn't compile anything. We just check that package
+  // symbol contains annotations when loaded from class files
+  override def code = ""
 
   def check(source: String, unit: global.CompilationUnit): Unit = {
     import global._
