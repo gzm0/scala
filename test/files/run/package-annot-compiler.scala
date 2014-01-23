@@ -12,7 +12,7 @@ object Test extends CompilerTest {
 
     import scala.annotation.StaticAnnotation
     class annot extends StaticAnnotation
-    
+
     @annot
     package object bar {
       def value = 1
