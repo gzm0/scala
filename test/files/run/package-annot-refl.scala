@@ -1,10 +1,18 @@
-import scala.reflect.runtime.{
-  currentMirror => mirror,
-  universe      => ru
+package foo {
+
+  import scala.annotation.StaticAnnotation
+  class annot(val x: Any) extends StaticAnnotation
+
+  @annot("hello world")
+  package object bar {
+    def one = 1
+  }
+
 }
 
 object Test extends App {
-  import ru._
+  import scala.reflect.runtime.universe._
+  import scala.reflect.runtime.{ currentMirror => mirror }
 
   // Package symbol
   val packageSym = mirror.staticPackage("foo.bar")
@@ -13,8 +21,6 @@ object Test extends App {
 
   // Type of annotation
   val annotTpe = typeOf[foo.annot]
-
-  println(packageSym.typeSignature.members)
 
   // Check annotation is on package object
   assert(poSym.annotations match {
