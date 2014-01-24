@@ -1630,6 +1630,34 @@ abstract class RefChecks extends InfoTransform with scala.reflect.internal.trans
             }
             tree
 
+          case _: TypeDef =>
+            // Check that if this type def is abstract, that it is in
+            // a position where this is allowed
+
+            val sym = tree.symbol
+
+            // Is this symbol type always allowed the deferred flag?
+            def symbolAllowsDeferred = (
+                 sym.isTypeParameterOrSkolem
+              || tree.isInstanceOf[ExistentialTypeTree]
+            )
+            // Does the symbol owner require no undefined members?
+            def ownerRequiresConcrete = (
+                 !sym.owner.isClass
+              ||  sym.owner.isModuleClass
+              ||  sym.owner.isAnonymousClass
+            )
+
+            if (  sym.isDeferred
+              && !symbolAllowsDeferred
+              &&  ownerRequiresConcrete) {
+
+              unit.error(tree.pos, "only classes can have declared " +
+                "but undefined members")
+            }
+
+            tree
+
           case Template(parents, self, body) =>
             localTyper = localTyper.atOwner(tree, currentOwner)
             validateBaseTypes(currentOwner)
