@@ -1,0 +1,27 @@
+undefined-members.scala:6: error: only classes can have declared but undefined members
+  def x: Int
+      ^
+undefined-members.scala:10: error: only classes can have declared but undefined members
+  val x: Int
+      ^
+undefined-members.scala:14: error: only classes can have declared but undefined members
+(Note that variables need to be initialized to be defined)
+  var x: Int
+      ^
+undefined-members.scala:18: error: only classes can have declared but undefined members
+  type X
+       ^
+undefined-members.scala:25: error: only classes can have declared but undefined members
+  val a = new { def x: Int }
+                    ^
+undefined-members.scala:26: error: only classes can have declared but undefined members
+  val b = new { val x: Int }
+                    ^
+undefined-members.scala:27: error: only classes can have declared but undefined members
+(Note that variables need to be initialized to be defined)
+  val c = new { var x: Int }
+                    ^
+undefined-members.scala:28: error: only classes can have declared but undefined members
+  val d = new { type X }
+                     ^
+8 errors found
