@@ -8,9 +8,6 @@ undefined-members.scala:13: error: object creation impossible, since variable x 
 (Note that variables need to be initialized to be defined)
 object C {
        ^
-undefined-members.scala:18: error: only classes can have declared but undefined members
-  type X
-       ^
 undefined-members.scala:21: error: object creation impossible, since method x in trait Iface of type => Int is not defined
 object E extends Iface
        ^
@@ -24,13 +21,10 @@ undefined-members.scala:27: error: object creation impossible, since variable x 
 (Note that variables need to be initialized to be defined)
   val c = new { var x: Int }
               ^
-undefined-members.scala:28: error: only classes can have declared but undefined members
-  val d = new { type X }
-                     ^
 undefined-members.scala:29: error: object creation impossible, since method x in trait Iface of type => Int is not defined
   val e = new Iface { val one = 1 }
               ^
 undefined-members.scala:33: error: class ShouldBeAbstract needs to be abstract, since method x is not defined
 class ShouldBeAbstract {
       ^
-11 errors found
+9 errors found
