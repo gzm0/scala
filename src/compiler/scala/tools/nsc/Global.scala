@@ -29,8 +29,6 @@ import transform.patmat.PatternMatching
 import transform._
 import backend.icode.{ ICodes, GenICode, ICodeCheckers }
 import backend.{ ScalaPrimitives, Platform, JavaPlatform }
-import backend.jvm.GenBCode
-import backend.jvm.GenASM
 import backend.opt.{ Inliners, InlineExceptionHandlers, ConstantOptimization, ClosureElimination, DeadCodeElimination }
 import backend.icode.analysis._
 import scala.language.postfixOps
@@ -609,20 +607,6 @@ class Global(var currentSettings: Settings, var reporter: Reporter)
     val runsAfter = List("closelim")
     val runsRightAfter = None
   } with DeadCodeElimination
-
-  // phaseName = "jvm", ASM-based version
-  object genASM extends {
-    val global: Global.this.type = Global.this
-    val runsAfter = List("dce")
-    val runsRightAfter = None
-  } with GenASM
-
-  // phaseName = "bcode"
-  object genBCode extends {
-    val global: Global.this.type = Global.this
-    val runsAfter = List("dce")
-    val runsRightAfter = None
-  } with GenBCode
 
   // phaseName = "terminal"
   object terminal extends {

@@ -406,8 +406,7 @@ abstract class CleanUp extends Statics with Transform with ast.TreeDSL {
     override def transform(tree: Tree): Tree = tree match {
 
       case _: ClassDef
-      if (entryPoints != null) &&
-         genBCode.isJavaEntryPoint(tree.symbol, currentUnit)
+      if (entryPoints != null) && false
       =>
         // collecting symbols for entry points here (as opposed to GenBCode where they are used)
         // has the advantage of saving an additional pass over all ClassDefs.

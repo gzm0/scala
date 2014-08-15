@@ -156,7 +156,7 @@ abstract class AbstractFile extends Iterable[AbstractFile] {
    *  encoding when converting to the char array.
    */
   @throws(classOf[IOException])
-  def toCharArray = new String(toByteArray).toCharArray
+  def toCharArray = new String(toByteArray, "UTF8").toCharArray
 
   /** Returns contents of file (if applicable) in a byte array.
    */
