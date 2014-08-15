@@ -12,9 +12,9 @@ object Properties extends scala.util.PropertiesTrait {
   protected def pickJarBasedOn = classOf[Global]
 
   // settings based on jar properties
-  def residentPromptString = scalaPropOrElse("resident.prompt", "\nnsc> ")
-  def shellPromptString    = scalaPropOrElse("shell.prompt", "\nscala> ")
+  def residentPromptString = "\nnsc> "//scalaPropOrElse("resident.prompt", "\nnsc> ")
+  def shellPromptString    = "\nscala> "//scalaPropOrElse("shell.prompt", "\nscala> ")
 
   // derived values
-  def isEmacsShell         = propOrEmpty("env.emacs") != ""
+  def isEmacsShell         = false //propOrEmpty("env.emacs") != ""
 }

@@ -1548,7 +1548,8 @@ class Global(var currentSettings: Settings, var reporter: Reporter)
         )
         if (shouldWriteIcode) {
           // Write *.icode files when -Xprint-icode or -Xprint:<some-optimiz-phase> was given.
-          writeICode()
+          // Scala.js: No ICode
+          // writeICode()
         } else if ((settings.Xprint containsPhase globalPhase) || settings.printLate && runIsAt(cleanupPhase)) {
           // print trees
           if (settings.Xshowtrees || settings.XshowtreesCompact || settings.XshowtreesStringified) nodePrinters.printAll()
@@ -1564,8 +1565,10 @@ class Global(var currentSettings: Settings, var reporter: Reporter)
           showMembers()
 
         // browse trees with swing tree viewer
-        if (settings.browse containsPhase globalPhase)
-          treeBrowser browse (phase.name, units)
+        if (settings.browse containsPhase globalPhase) {
+          // Scala.js: No tree browser
+          //treeBrowser browse (phase.name, units)
+        }
 
         // move the pointer
         globalPhase = globalPhase.next
